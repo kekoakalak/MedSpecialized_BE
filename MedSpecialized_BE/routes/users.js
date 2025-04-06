@@ -57,10 +57,11 @@ router.post('/', auth, adminOnly, async (req, res) => {
 // Update existing user
 router.put('/:id', auth, adminOnly, async (req, res) => {
 
+    //initialize user input 
     const { email, password, name, role, status } = req.body;
 
     try{
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id); //check if user id exist
         if (!user){
             return res.status(404).json({ message: 'User not found' });
         }
@@ -69,6 +70,7 @@ router.put('/:id', auth, adminOnly, async (req, res) => {
             return res.status(400).json({ message: 'Invalid email' });
         }
 
+        // update user credentials
         user.email = email || user.email;
         user.name = name || user.name;
         user.role = role || user.role;
@@ -85,3 +87,25 @@ router.put('/:id', auth, adminOnly, async (req, res) => {
     }
 
 });
+
+//Delete user (admin only)
+router.delete('/:id', auth, adminOnly, async (req, res) => {
+
+    //check if user exist
+    try{
+        const user = await User.findById(req.params.id);
+
+        if (!user){
+            return req.status(404).json({ message: 'User not found' });
+        }
+
+        await user.remove();
+        res.json({ message: 'User deleted successfully' });
+
+    }catch(error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+
+});
+
+module.exports = router;

@@ -34,7 +34,8 @@ router.post('/', auth, adminOnly, async (req, res) => {
             return res.status(400).json({ message: 'User already exist' });
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10); //use bcrypt to hash password
+        // initialize user credential values to user obj
         user = new User({
             email,
             hashedPassword,
@@ -66,6 +67,7 @@ router.put('/:id', auth, adminOnly, async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
+        //check if email is valid
         if (email && !validator.isEmail(email)){
             return res.status(400).json({ message: 'Invalid email' });
         }
@@ -93,13 +95,13 @@ router.delete('/:id', auth, adminOnly, async (req, res) => {
 
     //check if user exist
     try{
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id); //search by id
 
         if (!user){
             return req.status(404).json({ message: 'User not found' });
         }
 
-        await user.remove();
+        await user.remove(); //removes user
         res.json({ message: 'User deleted successfully' });
 
     }catch(error) {

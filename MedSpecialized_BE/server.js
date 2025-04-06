@@ -3,6 +3,7 @@ const dotenv = require(`dotenv`);
 const connectDB = require (`./config/db`);
 const User = require('./models/User'); // Import the User model
 const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
+const cors = require('cors'); // Add CORS
 
 
 // Load environment variables
@@ -10,6 +11,8 @@ dotenv.config();
 
 const app = express();
 
+// Enable CORS for all routes
+app.use(cors());
 
 // Middleware to parse JSON
 app.use(express.json());

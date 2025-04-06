@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 //Initialize header for authentication
 const auth = (req, res, next) => {
     // Extract the token from the 'Authorization' header, removing the 'Bearer ' prefix
-    const token = req.header('Authorization')?.replace(`Bearer`, ``);
+    const token = req.header('Authorization')?.replace(/^Bearer /, '');
 
     // Check if the token is missing
     if (!token){

@@ -1,21 +1,20 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
+  },
+  parser: 'vue-eslint-parser',  // Vue-specific parser
+  parserOptions: {
+    parser: '@babel/eslint-parser', // Babel parser for JS files
+    requireConfigFile: false, // Allow parsing without needing babel.config.js explicitly
   },
   extends: [
-    'plugin:vue/essential',
-    '@vue/standard'
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    'plugin:vue/recommended',
   ],
-  parserOptions: {
-    parser: '@babel/eslint-parser',
-     "babelOptions": {
-      "configFile": "./babel.config.js"
-     }
-  },
-
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
-  }
-}
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+  },
+};

@@ -2,6 +2,7 @@ const mongoose = require(`mongoose`);
 
 const userScheme = new mongoose.Schema({
 
+    //Initialize User model structure
     email: {
         type: String,
         required: true,

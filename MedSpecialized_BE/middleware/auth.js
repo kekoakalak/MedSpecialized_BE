@@ -1,14 +1,19 @@
 const jwt = require('jsonwebtoken');
 
+//Initialize header for authentication
 const auth = (req, res, next) => {
+    // Extract the token from the 'Authorization' header, removing the 'Bearer ' prefix
     const token = req.header('Authorization')?.replace(`Bearer`, ``);
+
+    // Check if the token is missing
     if (!token){
         return res.status(401).json({message: 'No token!, Authorization denied'});
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);  // Verify the token using the JWT_SECRET from environment variables
+
+        req.user = decoded;    // Attach the decoded user data (e.g., user ID and role) to the request object
         next();
     }catch(error){
         res.status(401).json({message: 'Token is not valid'});

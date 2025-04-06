@@ -35,8 +35,6 @@ The frontend server will run on the following URL:
 
 Local URL: http://localhost:8080/
 
-Network URL: http://192.168.1.7:8080/
-
 2. Backend Setup
 Navigate to the backend directory and install the necessary dependencies:
 

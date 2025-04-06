@@ -24,12 +24,12 @@ app.use('/api/users', require('./routes/users'));
 // Function to set up the default admin user
 const setupDefaultAdmin = async () => {
     try{
-        const adminExists = await User.findOne({email: 'admin@medspec.com'});
+        const adminExists = await User.findOne({email: 'admin@meditab.com'});
         if (!adminExists){
             const hashedPassword = await bcrypt.hash('admin123', 10);
             // Set adminUser credentials if it doesnt exist
             const adminUser = new User({
-                email: 'admin@medspec.com',
+                email: 'admin@meditab.com',
                 password: hashedPassword,
                 name: 'Admin User',
                 role: 'Admin',

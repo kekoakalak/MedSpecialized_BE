@@ -5,7 +5,7 @@ const jwt = require(`jsonwebtoken`);
 const validator = require(`validator`);
 const User = require(`../models/User`);
 
-router.post('/login,', async (req, res) => {
+router.post('/login', async (req, res) => {
     const {email, password} = req.body;
 
     //validate email format
